@@ -1,4 +1,16 @@
 {% extends 'base.html' %}{% load static %}
 {% block title %}<title>MainPage</title>{% endblock title%}
 {% block content %}
+
+ {% for article in articles %}
+        <div class="article">
+            <div class="date">{{ article.date }}</div>
+            <strong>{{ article.author }}</strong>
+			<a href="/detail/{{ article.id }}">{{ article.title|linebreaks }}</a>
+        </div>
+        <hr>
+{% endfor %}
+
+
+
 {% endblock content%}

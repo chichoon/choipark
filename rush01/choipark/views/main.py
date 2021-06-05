@@ -4,14 +4,18 @@ from django.views.generic import View
 from ..models import ArticleModel
 
 class MainView(View):
+    template_name = 'registration/main.html'
     def get(self, request) :
-        template_name = 'registration/main.html'
         try:
             article = ArticleModel.objects.all().order_by('-date')
         except Exception as e:
             article = []
         context = {
-            'article': article,
+            'articles': article,
         }
-        return render(request, template_name, context)
+        return render(request, self.template_name, context)
+    def  post(self, request):
+        return render(request, self.template_name)
+        
+
 
