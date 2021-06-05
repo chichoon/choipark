@@ -1,10 +1,10 @@
 {% extends 'base.html' %} 
 {% block content%}
 {% if user.is_authenticated %}
-    <form method="POST" action="{% url "main"%}" class="form">
+    <form method="POST" action="{% url 'add_article'%}" class="form">
         {% csrf_token %}
         {{ form }}
-        <button data-dismiss="model" type="submit">Post Article</button>
+        <button data-dismiss="model" type="submit" value="submit">Post Article</button>
     </form>
 {% else %}
 <h1>you are not logged in!</h1>

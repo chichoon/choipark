@@ -1,9 +1,10 @@
 from django.conf import settings
 from django.db import models
+from ..models import *
 
 
 class CommentsModel(models.Model):
-    article = models.ForeignKey('ArticleModel', on_delete=models.CASCADE)
+    article = models.ForeignKey(ArticleModel,default='0', on_delete=models.CASCADE)
     # 1 article : N comments
     content = models.TextField(null=False)
     author = models.ForeignKey(

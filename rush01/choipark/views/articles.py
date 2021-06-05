@@ -4,6 +4,10 @@ from ..forms import ArticleForm
 from ..models import ArticleModel
 
 class ArticleView(View):
+    def get(self, request, article_id):
+        article = ArticleModel.objects.all().filter(id=article_id)
+        return render(request, 'view_article.html', {'article': article[0]})
+
     def post(self, request):
         form = ArticleForm(request.POST)
         if request.POST.get('up') or request.POST.get('down'):

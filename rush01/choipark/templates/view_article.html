@@ -1,20 +1,22 @@
-{% if user.is_authenticated %}
+{% extends 'base.html' %}
+
+{% comment %} {% if user.is_authenticated %}
     <form method="POST" action="{% url "article"%}" class="form">
         {% csrf_token %}
         <input type="hidden" value="{{article.author}}" name="article.author">
         댓글 작성 : <input type="text" name="content"></input>
         <button data-dismiss="modal" type="submit">작성</button>
     </form>
-{%endif%}
+{%endif%} {% endcomment %}
+{% block content %}
 <br>
     <hr>
-    {% for article in articles %}
         <div class="article">
-            <div class="date">{{ article.date }}</div>
-            <strong>{{ article.author }}</strong>
-            <p>{{ article.title|linebreaks }}</p>
+            <div class="date">{{ article.date }} | author : <strong>{{ article.author }}</strong></div>
+            <h1>{{ article.title|linebreaks }}</h1>
+            <p>{{ article.content|linebreaks }}</p>
         </div>
-        <form method="POST" action="{% url "article"%}">
+        {% comment %} <form method="POST" action="{% url "article"%}">
             {% csrf_token %}
             {% if user.is_authenticated %}
                 <button type="submit" name="up" value="{{article.pk}}">
@@ -34,6 +36,6 @@
             {%else%}
             <button>Delete</button>
             {%endif%}
-        </form>
+        </form> {% endcomment %}
         <hr>
-{% endfor %}
+{%endblock content%}

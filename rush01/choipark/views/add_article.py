@@ -3,7 +3,7 @@ from ..forms import ArticleForm
 from ..models import ArticleModel
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 class AddArticle(LoginRequiredMixin, FormView):
@@ -13,27 +13,24 @@ class AddArticle(LoginRequiredMixin, FormView):
     login_url = reverse_lazy('login')
 
     def get(self, request):
-        form = self.form_class(initial=self.initial)
-        self.form_invalid
-        return render(request, self.template_name, {'form': form,})
+       form = self.form_class(initial=self.initial)
+       return render(request, self.template_name, {'form': form,})
 
     def post(self, request):
+        print("AAAA")
         form = self.form_class(request.POST)
-        self.form_valid(form)
-        return render(request, self.template_name, {'form': form,})
-
-    def form_valid(self, form):
-        title = form.clean_data['title']
-        content = form.clean_data['content']
-        try:
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
             ArticleModel.objects.create(
                 title=title,
                 content=content,
                 author=self.request.user,
             )
-        except print(0):
-            pass
-        return super().form_valid(form)
+        return redirect('main')
+
+    # def form_valid(self, form):
+        # return super().form_valid(form)
 
     def form_invalid(self, form_class):
         return super().form_invalid()
