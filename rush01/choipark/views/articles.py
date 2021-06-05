@@ -1,6 +1,4 @@
-from django.contrib.auth import authenticate, logout
-from django.shortcuts import  redirect, render
-import random
+from django.shortcuts import render
 from django.views import View
 from ..forms import ArticleForm
 from ..models import ArticleModel
@@ -23,4 +21,4 @@ class ArticleView(View):
                 article = ArticleModel(content=request.POST.get('content'), author=request.user)
                 article.save()
         articles = ArticleModel.objects.all()
-        return render(request, 'base.html', {'articles': articles, 'form': form})
+        return render(request, 'base.html', {'form': form})

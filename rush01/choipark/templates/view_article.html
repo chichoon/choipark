@@ -12,7 +12,7 @@
         <div class="article">
             <div class="date">{{ article.date }}</div>
             <strong>{{ article.author }}</strong>
-            <p>{{ article.content|linebreaks }}</p>
+            <p>{{ article.title|linebreaks }}</p>
         </div>
         <form method="POST" action="{% url "article"%}">
             {% csrf_token %}

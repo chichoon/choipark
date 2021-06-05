@@ -3,6 +3,7 @@ from django.db import models
 
 
 class ArticleModel(models.Model):
+    article_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=128, unique=True)
     content = models.TextField(null=False)
     author = models.ForeignKey(
