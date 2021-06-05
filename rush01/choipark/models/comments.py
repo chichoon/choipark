@@ -11,9 +11,14 @@ class CommentsModel(models.Model):
         on_delete=models.CASCADE)
     # 1 user : N comments
     date = models.DateTimeField(auto_now_add=True)
-    reply = models.ForeignKey('self', blank=True, null=True, related_name='comments')
-    upvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='upvotes')
-    downvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='downvotes')
+    reply = models.ForeignKey(
+        'self', 
+        blank=True, 
+        null=True, 
+        related_name='comments',
+        on_delete=models.CASCADE)
+    upvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='upvotes_comment')
+    downvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='downvotes_comment')
 
     def upvote(self, user):
         if self.downvotes.filter(id=user.id).count():

@@ -1,1 +1,4 @@
-from .tip import *
+from .articles import *
+from .comments  import *
+from .user import *
+

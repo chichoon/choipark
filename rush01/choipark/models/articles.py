@@ -10,8 +10,8 @@ class ArticleModel(models.Model):
         on_delete=models.CASCADE)
     # 1 user : N articles
     date = models.DateTimeField(auto_now_add=True)
-    upvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='upvotes')
-    downvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='downvotes')
+    upvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='upvotes_article')
+    downvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='downvotes_article')
 
     def upvote(self, user):
         if self.downvotes.filter(id=user.id).count():
