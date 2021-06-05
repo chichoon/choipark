@@ -17,7 +17,6 @@ class AddArticle(LoginRequiredMixin, FormView):
        return render(request, self.template_name, {'form': form,})
 
     def post(self, request):
-        print("AAAA")
         form = self.form_class(request.POST)
         if form.is_valid():
             title = form.cleaned_data['title']
@@ -32,5 +31,5 @@ class AddArticle(LoginRequiredMixin, FormView):
     # def form_valid(self, form):
         # return super().form_valid(form)
 
-    def form_invalid(self, form_class):
-        return super().form_invalid()
+    # def form_invalid(self, form_class):
+        # return super().form_invalid()

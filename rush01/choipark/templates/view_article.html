@@ -16,7 +16,7 @@
             <h1>{{ article.title|linebreaks }}</h1>
             <p>{{ article.content|linebreaks }}</p>
         </div>
-        {% comment %} <form method="POST" action="{% url "article"%}">
+        <form method="POST" action="">
             {% csrf_token %}
             {% if user.is_authenticated %}
                 <button type="submit" name="up" value="{{article.pk}}">
@@ -36,6 +36,6 @@
             {%else%}
             <button>Delete</button>
             {%endif%}
-        </form> {% endcomment %}
+        </form>
         <hr>
 {%endblock content%}
