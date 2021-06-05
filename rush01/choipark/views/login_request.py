@@ -6,7 +6,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.views.decorators.csrf import csrf_exempt
 
 
-@csrf_exempt
 class LoginView(View):
     def post(self, request):
         form = AuthenticationForm(request, data=request.POST)

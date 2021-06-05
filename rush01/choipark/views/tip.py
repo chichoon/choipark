@@ -1,8 +1,9 @@
-from django.shortcuts import render
-from django.views.generic import View
+from django.contrib.auth import authenticate, logout
+from django.shortcuts import  redirect, render
+import random
+from django.views import View
 from ..forms import TipForm
 from ..models import TipModel
-
 
 class TipView(View):
     def post(self, request):
