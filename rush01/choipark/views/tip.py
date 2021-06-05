@@ -8,6 +8,7 @@ from ..models import TipModel
 class TipView(View):
     def post(self, request):
         form = TipForm(request.POST)
+        print("@@@")
         if request.POST.get('up') or request.POST.get('down'):
             tip = TipModel.objects.get(pk=request.POST.get('up') or request.POST.get('down'))
             if request.POST.get('up'):
