@@ -1,2 +1,5 @@
 from .newuserform import *
-from .tip import *
+from .article import *
+from .comment import *
+from .profile import *
+
