@@ -5,8 +5,8 @@ from django.views import View
 from ..forms import TipForm
 from ..models import TipModel
 
-class createtip(View):
-    def post(self, request) :
+class TipView(View):
+    def post(self, request):
         form = TipForm(request.POST)
         if request.POST.get('up') or request.POST.get('down'):
             tip = TipModel.objects.get(pk=request.POST.get('up') or request.POST.get('down'))
