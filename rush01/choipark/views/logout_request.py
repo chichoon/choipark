@@ -8,4 +8,4 @@ class LogOutView(auth_views.LogoutView):
     def get(self, request):
         logout(request)
         messages.info(request, "You have successfully logged out.")
-        success_url = "login"
+        return redirect("main")
