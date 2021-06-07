@@ -50,6 +50,8 @@ class ArticleView(FormView):
 
 class WriteCommentView(FormView):
     def post(self, request, article_id):
+        if request.user.is_anonymous:
+            return redirect('login')
         form = CommentForm(request.POST)
         if form.is_valid():
             temp_form = form.save(commit=False)
@@ -70,6 +72,8 @@ class DeleteCommentView(FormView):
 
 class WriteReplyView(FormView):
     def post(self, request, comment_id, article_id):
+        if request.user.is_anonymous:
+            return redirect('login')
         form = ReplyForm(request.POST)
         if form.is_valid():
             temp_form = form.save(commit=False)
