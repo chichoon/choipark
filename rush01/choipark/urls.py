@@ -1,6 +1,6 @@
 from . import views
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
     path('login/', views.LoginView.as_view(), name="login"),
     path('post/', views.AddArticle.as_view(), name="add_article"),
     path('detail/<int:article_id>', views.ArticleView.as_view(),  name="article"),
+    path('profile/<int:userid>', views.ProfileView.as_view(),  name="profile"),
 ]
