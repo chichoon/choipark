@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import FormView
 from ..forms import CommentForm, ReplyForm
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 from ..models import ArticleModel, CommentsModel, ReplyModel
 
-class ArticleView(FormView):
+class ArticleView(LoginRequiredMixin, FormView):
     form_comment = CommentForm
     form_reply = ReplyForm
+    login_url = reverse_lazy('login')
     def get(self, request, article_id):
         article = get_object_or_404(ArticleModel, id=article_id)
         context = {

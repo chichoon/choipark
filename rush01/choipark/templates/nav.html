@@ -1,32 +1,38 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="/">Welcome [{{user.username}}]</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'main' %}">Home</a>
-        </li>
+<nav class="navbar">
+    <div class="navbar-left">
         {% if user.is_authenticated %}
-        <li class="nav-item">
-            <a class="nav-link" href="{%url 'add_article'%}">post</a>
-            <a class="nav-link" href="/profile/{{ user.id }}">profile</a>
-            <a class="nav-link" href="{%url 'logout'%}">Logout</a>
-        </li>
+        <a class="nav-link" href="/">Welcome, {{user.username}}!</a>
         {% else %}
-        <li class="nav-item">
+        <a class="nav-link" href="/">Welcome to our site!</a>
+        {% endif %}
+    </div>
+    <div class="navbar-right">
+        <div class="div-link">
+            <a class="nav-link" href="{% url 'main' %}">Home</a>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="div-link">
+            <a class="nav-link" href="{%url 'add_article'%}">post</a>
+        </div>
+        <div class="div-link">
+            <a class="nav-link" href="/profile/{{ user.id }}">profile</a>
+        </div>
+        <div class="div-link">
+            <a class="nav-link" href="{%url 'logout'%}">Logout</a>
+        </div>
+        {% else %}
+        <div class="div-link">
             <a class="nav-link" href="{%url 'login'%}">Login</a>
-        </li>
-        <li class="nav-item">
+        </div>
+        <div class="div-link">
             <a class="nav-link" href="{%url 'register'%}">Register</a>
-        </li>
+        </div>
         {% endif %}
         {% if request.user.is_superuser == True %}
-        <li class="nav-item">
-            <a class="nav-link" href="admin/">Admin Pages</a>
-        </li>
-        </ul>
+        <div class="div-link">
+            <a class="nav-link" href="/admin/">Admin Pages</a>
+        </div>
         {% else %}
         {% endif %}
     </div>
-    </nav>
+</nav>

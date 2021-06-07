@@ -1,30 +1,32 @@
-version: '3.3'
+version: "3"
 
 services:
-  web: #django server
-    build: 
-      context : ./
-    command : >
-      bash -c "python3 manage.py makemigrations
-      && python3 manage.py migrate   
-      && python3 manage.py collectstatic --noinput
-      && gunicorn rush01.rush01.wsgi:application -b 0.0.0.0:8000
+  choipark:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: intranet_service
     volumes:
-      - static_volume:/usr/src/app/static_volume
-      - media_volume:/usr/src/app/media
-    expose:
-      - 8000
-    env_file:
-      - ./.env.dev
-  nginx:
-    build: ./nginx
-    volumes:
-      - static_volume:/usr/src/app/static_volume
-      - media_volume:/usr/src/app/media
+      - "static:/usr/src/app/static"
+      - "media:/usr/src/app/media"
     ports:
-      - 1337:80
-    depends_on: 
-      - web
-volumes :
-  static_volume:
-  media_volume:
+      - "8000:8000"
+    expose:
+      - "8000"
+  nginx:
+    build:
+      context: .
+      dockerfile: dockerfile-nginx
+    container_name: nginx_service
+    volumes:
+      - "static:/usr/src/app/static"
+      - "media:/usr/src/app/media"
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - choipark
+
+volumes:
+  static:
+  media:
