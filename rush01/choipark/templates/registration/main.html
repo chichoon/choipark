@@ -5,7 +5,7 @@
  {% for article in articles %}
         <div class="article">
             <div class="date">{{ article.date }}</div>
-            <strong>{{ article.author }}</strong>
+            <a href="/profile/{{article.author.id}}"><strong>{{ article.author }}</strong></a>
 			<a href="/detail/{{ article.id }}">{{ article.title|linebreaks }}</a>
         </div>
         <hr>

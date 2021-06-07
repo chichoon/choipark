@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import CreateView 
+from django.views.generic import CreateView
 from django.views.generic import View
 from ..models import ArticleModel
 
@@ -16,6 +16,6 @@ class MainView(View):
         return render(request, self.template_name, context)
     def  post(self, request):
         return render(request, self.template_name)
-        
+
 
 

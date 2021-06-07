@@ -2,6 +2,8 @@ from . import views
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('', views.MainView.as_view(), name="main"),
@@ -11,4 +13,5 @@ urlpatterns = [
     path('post/', views.AddArticle.as_view(), name="add_article"),
     path('detail/<int:article_id>', views.ArticleView.as_view(),  name="article"),
     path('profile/<int:userid>', views.ProfileView.as_view(),  name="profile"),
-]
+    path('profile/modify', views.ProfileModifyView.as_view(),  name="modify_profile"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

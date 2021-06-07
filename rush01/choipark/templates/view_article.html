@@ -12,7 +12,7 @@
 <br>
     <hr>
         <div class="article">
-            <div class="date">{{ article.date }} | author : <strong>{{ article.author }}</strong></div>
+            <div class="date">{{ article.date }} | author : <a href="/profile/{{article.author.id}}"><strong>{{ article.author }}</strong></a></div>
             <h1>{{ article.title|linebreaks }}</h1>
             <p>{{ article.content|linebreaks }}</p>
         </div>
