@@ -7,7 +7,7 @@ class ArticleView(FormView):
     form_comment = CommentForm
     form_reply = ReplyForm
     def get(self, request, article_id):
-        article = ArticleModel.objects.get(id=article_id)
+        article = get_object_or_404(ArticleModel, id=article_id)
         context = {
             'article' : article,
             'form_comment' : self.form_comment,
