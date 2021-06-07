@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<form method="POST" action="{% url 'modify_profile'%}" class="form" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form }}
+	<button data-dismiss="model" type="submit" value="submit">Modify profile</button>
+</form>
+{% else %}
+<h1>you are not logged in!</h1>
+{% endif %}
+{% endblock %}

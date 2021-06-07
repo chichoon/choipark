@@ -1,7 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
 class UserProfileModel(models.Model):
@@ -10,4 +7,4 @@ class UserProfileModel(models.Model):
     surname = models.CharField('surname', max_length=30)
     email = models.EmailField('email', blank=True)
     description = models.TextField('description', blank=True)
-    profile_image = models.ImageField('profile_image', blank=True)
+    profile_image = models.ImageField('profile_image', blank=True, null=True, upload_to='image')

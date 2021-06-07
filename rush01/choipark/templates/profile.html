@@ -4,23 +4,25 @@
 <div id="profile">
 	<div class="row" style="display: flex; flex-direction: row;">
 		<div class="col-4" style="margin-right: 30px;">
-			<img src={% if profiles.profile_image %}
-				"media/{{ profiles.profile_image }}"
+			<img src="
+				{% if profile.profile_image %}
+				/media/{{ profile.profile_image }}
 				{% else %}
-				"https://i.stack.imgur.com/34AD2.jpg"
+				https://i.stack.imgur.com/34AD2.jpg
 				{% endif %}
+				"
 				width="150rem" style="border-radius: 50%;" alt="">
 		</div>
 		<div class="col-8">
 
-			<h2>{{ profiles.username }}
+			<h2>{{ profile.username }}
 				{% if if_self == 1 %}
-				<a href="/modify"><button class="btn btn-success">Modify Profile</button></a>
+				<a href="/profile/modify"><button class="btn btn-success">Modify Profile</button></a>
 				{% endif %}
 			</h2>
-			<p>{{ profiles.name }} {{ profiles.surname }}</p>
-			<p>{{ profiles.email }}</p>
-			<p>{{ profiles.profile.description }}</p>
+			<p>{{ profile.name }} {{ profile.surname }}</p>
+			<p>{{ profile.email }}</p>
+			<p>{{ profile.description }}</p>
 		</div>
 	</div>
 </div>
