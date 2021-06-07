@@ -20,7 +20,7 @@ class LoginView(View):
             return redirect('main')
         else:
             form = AuthenticationForm()
-            return render(request, 'login.html', {'login_form': form})
+            return render(request, 'login.html', {'login_form': form, 'message': 'login failed!',})
 
 
 class LogOutView(auth_views.LogoutView):
@@ -42,4 +42,8 @@ class RegisterView(View):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+        else:
+            form = UserCreationForm()
+            return render(request, 'register.html', {'register_form': form, 'message': 'Register failed!',})
+
         return redirect('main')
