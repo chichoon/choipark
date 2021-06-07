@@ -12,6 +12,7 @@ urlpatterns = [
     path('login/', views.LoginView.as_view(), name="login"),
     path('post/', views.AddArticle.as_view(), name="add_article"),
     path('detail/<int:article_id>', views.ArticleView.as_view(),  name="article"),
+    path('detail/<int:comment_id>', views.CreateComment.as_view(),  name="detail"),
     path('profile/<int:userid>', views.ProfileView.as_view(),  name="profile"),
     path('profile/modify', views.ProfileModifyView.as_view(),  name="modify_profile"),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
