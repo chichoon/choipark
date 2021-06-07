@@ -14,7 +14,7 @@ python -m pip --version
 pip install --upgrade pip
 
 # pip install 
-python -m pip install -q -I django psycopg2-binary
+python -m pip install -q -I django psycopg2-binary pillow
 
 
 # nginx install
