@@ -1,3 +1,4 @@
+from django.db.models.fields.related import ForeignKey
 from django.shortcuts import render, redirect
 from django.views import View
 from ..forms import ArticleForm, CommentForm
@@ -7,10 +8,11 @@ class ArticleView(View):
     def get(self, request, article_id):
         article = ArticleModel.objects.all().filter(id=article_id)
         comment = CommentForm()
-        comments = CommentsModel.objects.all().filter(id=article_id)
+        comments = CommentsModel.objects.all().filter
+        # comments = article.comments.all()
         context = {
             'article' : article[0],
-            'comment' : comment,
+            'commentin' : comment,
             'comments' : comments,
         }
         return render(request, 'view_article.html', context)
@@ -34,13 +36,22 @@ class ArticleView(View):
             if content is not None:
                 article = ArticleModel(content=request.POST.get('content'), author=request.user)
                 article.save()
+
         articles = ArticleModel.objects.all().filter(id=article_id)
         comment = CommentForm(request.POST)
+        comment.instance.author_id = request.user.id
+        comment.instance.article_id = article_id
         if comment.is_valid :
-            comment.save(commit=False)
+            content=request.POST.get('content')
+            if content is not None:
+                comment.save()
+        comment = CommentForm()
+        comments = article.comments.all()
+        
         context = {
             "form" : form,
             "article" : articles[0],
             "comment" : comment,
+            "comments" : comments,
         }
         return render(request, 'view_article.html', context)
