@@ -12,6 +12,7 @@ class ProfileView(LoginRequiredMixin, FormView):
 
     def get(self, request, userid):
         self_flag = 0
+        sudo_flag = 0
         if self.request.user.id == userid:
             profiles = UserProfileModel.objects.get_or_create(username=self.request.user)
             profile = profiles[0]
@@ -25,9 +26,13 @@ class ProfileView(LoginRequiredMixin, FormView):
                 profile = profiles[0]
         if self.request.user.id == userid:
             self_flag = 1
+        if request.user.is_superuser:
+            print('aaa')
+            sudo_flag = 1
         return render(request, self.template_name, {
             'profile': profile,
             'if_self': self_flag,
+            'if_sudo': sudo_flag
         })
 
 

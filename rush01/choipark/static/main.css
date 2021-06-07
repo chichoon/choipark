@@ -23,3 +23,32 @@
 	color: rgb(196, 131, 63);
 }
 
+.pagination {
+	height: 50px;
+	line-height: 50px;
+}
+
+.pagination {
+	margin-top: 20px;
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	background-color: rgb(245, 173, 84);
+
+}
+
+.pagination a {
+	text-decoration: none;
+	color: rgb(255, 255, 255);
+
+}
+
+.page-item {
+	height: 60px;
+	line-height: 60px;
+	font-size: 40px;
+	font-weight: 700;
+    display: inline-block;
+	margin-left: 20px;
+	margin-right: 20px;
+}

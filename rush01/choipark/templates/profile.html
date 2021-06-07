@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block title %}<title>{{profile.username}} Profile</title>{% endblock title%}
+
+{% block style%}
+<link rel="stylesheet" href="{% static 'profile.css' %}">
+{% endblock %}
 
 {% block content %}
 <div id="profile">
@@ -11,19 +17,22 @@
 				https://i.stack.imgur.com/34AD2.jpg
 				{% endif %}
 				"
-				width="150rem" style="border-radius: 50%;" alt="">
+				width="150px" style="border-radius: 50%;" alt="">
 		</div>
 		<div class="col-8">
-
-			<h2>{{ profile.username }}
+			<div>{{ profile.username }}
+				{% if if_sudo == 1 %}
+				(⭐SUPERUSER⭐)
+				{% endif %}
 				{% if if_self == 1 %}
 				<a href="/profile/modify"><button class="btn btn-success">Modify Profile</button></a>
 				{% endif %}
-			</h2>
-			<p>{{ profile.name }} {{ profile.surname }}</p>
-			<p>{{ profile.email }}</p>
-			<p>{{ profile.description }}</p>
+			</div>
+			<p id="name">{{ profile.name }} {{ profile.surname }}</p>
+			<p id="email">{{ profile.email }}</p>
+			<p id="desc">{{ profile.description }}</p>
 		</div>
 	</div>
+	<hr>
 </div>
 {% endblock %}

@@ -63,3 +63,28 @@ nav a {
 nav a:visited {
 	color: white;
 }
+
+button {
+	padding: 5px 10px;
+	border: 0;
+	outline: 0;
+	background-color: rgb(245, 173, 84);
+	color: white;
+	border-radius: 5px;
+}
+
+button:hover {
+	background-color: rgb(244, 150, 50);
+	transition: background-color 0.2s;
+	cursor: pointer;
+}
+
+button:not(hover) {
+	background-color: rgb(245, 173, 84);
+	transition: background-color 0.2s;
+}
+
+button > a {
+	color: white;
+	text-decoration: none;
+}
