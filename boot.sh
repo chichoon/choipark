@@ -14,11 +14,11 @@ python -m pip --version
 pip install --upgrade pip
 
 # pip install 
-python -m pip install -q -I django psycopg2-binary pillow
+python -m pip install -q -I django psycopg2-binary pillow gunicorn bash
 
 
 # nginx install
-brew install nginx
+# brew install nginx
 
 
 # make requirement.txt
@@ -27,9 +27,9 @@ pip freeze > requirement.txt
 # sever start
 # django-admin startproject boot
 # python3 manage.py startapp ex00
-# python3 manage.py makemigrations
-# python3 manage.py migrate
-# python3 manage.py runserver
+python3 ./choipark/manage.py makemigrations
+python3 ./choipark/manage.py migrate
+python3 ./choipark/manage.py runserver
 
 
 # brew services start nginx
@@ -41,3 +41,7 @@ pip freeze > requirement.txt
 # find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 # find . -path "*/migrations/*.pyc"  -delete
 
+# docker-compose build
+# docker-compose up -d
+# docker-compose exec web bash
+# http://localhost:1337
