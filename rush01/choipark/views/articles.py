@@ -46,12 +46,10 @@ class ArticleView(View):
             if content is not None:
                 comment.save()
         comment = CommentForm()
-        comments = article.comments.all()
         
         context = {
             "form" : form,
             "article" : articles[0],
             "comment" : comment,
-            "comments" : comments,
         }
         return render(request, 'view_article.html', context)
