@@ -10,4 +10,4 @@ class CommentForm(forms.ModelForm):
 class ReplyForm(forms.ModelForm):
     class Meta:
         model = ReplyModel
-        fields = ["reply", "comment"]
+        fields = ["reply",]

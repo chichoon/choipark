@@ -5,7 +5,6 @@ from .login_request import *
 from .main import *
 from .add_article import *
 from .profile import *
-from .create_comment import *
 
 
 

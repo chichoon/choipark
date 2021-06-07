@@ -8,7 +8,6 @@ class CommentsModel(models.Model):
         ArticleModel,
         default='0',
         on_delete=models.CASCADE,
-        related_name='comments'
     )
     # 1 article : N comments
     comment = models.CharField('Comment', null=True, max_length=300)
@@ -49,7 +48,6 @@ class ReplyModel(models.Model):
     comment = models.ForeignKey(
         CommentsModel,
         default='0',
-        related_name='replies',
         on_delete=models.CASCADE)
     upvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='upvotes_reply')
     downvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='downvotes_reply')

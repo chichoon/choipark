@@ -8,16 +8,83 @@
     <h1>{{ article.title|linebreaks }}</h1>
     <p>{{ article.content|linebreaks }}</p>
 </div>
+<form method="POST" action="">
+    {% csrf_token %}
+    {% if user.is_authenticated %}
+        <button type="submit" name="up_article" value="{{article.pk}}">
+        up : {{article.upvotes.count}}{{article.modle.upvotes.count}}</button>
+    {%else%}
+        <button>up : {{article.upvotes.count}}</button>
+    {%endif%}
+    {% if user.is_authenticated %}
+        <button type="submit" name="down_article" value="{{article.pk}}">
+        down : {{article.downvotes.count}}{{article.modle.downvotes.count}}</button>
+    {%else%}
+        <button>down : {{article.downvotes.count}}</button>
+    {%endif%}
+    {% if user.is_authenticated %}
+    <button type="submit" name="delete_article" value="{{article.pk}}">
+        Delete</button>
+    {%else%}
+    <button>Delete</button>
+    {%endif%}
+</form>
 <hr>
 <form method="POST" action="{% url 'write_comment' article.id %}">
     {% csrf_token %}
     {{form_comment}}
     <input type="submit">
 </form>
-{{article}}
-{% for data in article.comments_set.all %}
-aaa
-<p>{{data.comment}}</p>
+<hr>
+{% for comment in article.commentsmodel_set.all %}
+<p style="font-size:20px;"><a href="/profile/{{comment.author.id}}"><strong>{{ comment.author }}</strong></a> in {{comment.date}}<br></p>
+<p>
+    {{comment.comment}}
+    <form method="POST" action="{% url 'article' article.id %}">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+            <button type="submit" name="up_comment" value="{{comment.pk}}">
+            up : {{comment.upvotes.count}}{{comment.model.upvotes.count}}</button>
+        {%else%}
+            <button>up : {{comment.upvotes.count}}</button>
+        {%endif%}
+        {% if user.is_authenticated %}
+            <button type="submit" name="down_comment" value="{{comment.pk}}">
+            down : {{comment.downvotes.count}}{{comment.model.downvotes.count}}</button>
+        {%else%}
+            <button>down : {{comment.downvotes.count}}</button>
+        {%endif%}
+        <a href="{% url 'delete_comment' comment.id article.id %}">delete</a>
+    </form>
+</p>
+<form method="post" action="{% url 'write_reply' comment.id article.id %}">
+    {% csrf_token %}
+    {{form_reply}}
+    <input type="submit">
+</form>
+{% for reply in comment.replymodel_set.all %}
+<p>
+    |- <a href="/profile/{{reply.author.id}}"><strong>{{ reply.author }}</strong></a> in {{reply.date}}<br>
+    |- {{reply.reply}}
+    <form method="POST" action="{% url 'article' article.id %}">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+            <button type="submit" name="up_reply" value="{{reply.pk}}">
+            up : {{reply.upvotes.count}}{{reply.model.upvotes.count}}</button>
+        {%else%}
+            <button>up : {{reply.upvotes.count}}</button>
+        {%endif%}
+        {% if user.is_authenticated %}
+            <button type="submit" name="down_reply" value="{{reply.pk}}">
+            down : {{reply.downvotes.count}}{{reply.model.downvotes.count}}</button>
+        {%else%}
+            <button>down : {{reply.downvotes.count}}</button>
+        {%endif%}
+        <a href="{% url 'delete_reply' reply.id article.id %}">delete</a>
+    </form>
+</p>
+{% endfor %}
+<hr>
 {% endfor %}
 
 {%endblock content%}

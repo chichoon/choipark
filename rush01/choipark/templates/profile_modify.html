@@ -4,7 +4,7 @@
 {% if user.is_authenticated %}
 <form method="POST" action="{% url 'modify_profile'%}" class="form" enctype="multipart/form-data">
 	{% csrf_token %}
-	{{ form }}
+	{{ form|linebreaks }}
 	<button data-dismiss="model" type="submit" value="submit">Modify profile</button>
 </form>
 {% else %}
