@@ -1,9 +1,9 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% block content%}
 {% if user.is_authenticated %}
     <form method="POST" action="{% url 'add_article'%}" class="form">
         {% csrf_token %}
-        {{ form }}
+        {{ form|linebreaks }}
         <button data-dismiss="model" type="submit" value="submit">Post Article</button>
     </form>
 {% else %}

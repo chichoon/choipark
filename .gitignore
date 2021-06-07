@@ -1,1 +1,3 @@
 venv_rush01
+db.sqlite3
+rush01/choipark/migrations/0*.py
