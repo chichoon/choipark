@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.db import models
-from ..models import *
+from ..models import ArticleModel
 
 
 class CommentsModel(models.Model):
@@ -13,9 +13,9 @@ class CommentsModel(models.Model):
     # 1 user : N comments
     date = models.DateTimeField(auto_now_add=True)
     reply = models.ForeignKey(
-        'self', 
-        blank=True, 
-        null=True, 
+        'self',
+        blank=True,
+        null=True,
         related_name='comments',
         on_delete=models.CASCADE)
     upvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='upvotes_comment')
