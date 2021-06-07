@@ -37,5 +37,11 @@
             <button>Delete</button>
             {%endif%}
         </form>
+        <form method="POST" action="" class="form">
+        {% csrf_token %}
+        {{ comment }}
+        <button data-dismiss="model" type="submit" value="submit">comment</button>
+         </form>
+
         <hr>
 {%endblock content%}
