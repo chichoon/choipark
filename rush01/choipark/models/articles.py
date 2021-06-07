@@ -28,3 +28,6 @@ class ArticleModel(models.Model):
             self.downvotes.remove(user)
         else:
             self.downvotes.add(user)
+    
+    def __str__(self):
+        return self.title

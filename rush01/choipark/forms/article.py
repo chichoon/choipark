@@ -1,7 +1,7 @@
 from django import forms
+from ..models import ArticleModel
 
-
-class ArticleForm(forms.Form):
-    title = forms.CharField(max_length=128, required=True)
-    content = forms.CharField(required=True)
-
+class ArticleForm(forms.ModelForm):
+    class Meta :
+        model = ArticleModel
+        fields = ["title", "content", ]
