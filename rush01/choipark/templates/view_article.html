@@ -1,101 +1,23 @@
 {% extends 'base.html' %}
 
-{% comment %} {% if user.is_authenticated %}
-    <form method="POST" action="{% url "article"%}" class="form">
-        {% csrf_token %}
-        <input type="hidden" value="{{article.author}}" name="article.author">
-        댓글 작성 : <input type="text" name="content"></input>
-        <button data-dismiss="modal" type="submit">작성</button>
-    </form>
-{%endif%} {% endcomment %}
 {% block content %}
 <br>
-    <hr>
-    <div class="article">
-        <div class="date">{{ article.date }} | author : <a href="/profile/{{article.author.id}}"><strong>{{ article.author }}</strong></a></div>
-        <h1>{{ article.title|linebreaks }}</h1>
-        <p>{{ article.content|linebreaks }}</p>
-    </div>
-    <form method="POST" action="">
-        {% csrf_token %}
-        {% if user.is_authenticated %}
-            <button type="submit" name="up" value="{{article.pk}}">
-            up : {{article.upvotes.count}}{{article.model.upvotes.count}}</button>
-        {%else%}
-            <button>up : {{article.upvotes.count}}</button>
-        {%endif%}
-        {% if user.is_authenticated %}
-            <button type="submit" name="down" value="{{article.pk}}">
-            down : {{article.downvotes.count}}{{article.model.downvotes.count}}</button>
-        {%else%}
-            <button>down : {{article.downvotes.count}}</button>
-        {%endif%}
-        {% if user.is_authenticated %}
-        <button type="submit" name="delete" value="{{article.pk}}">
-            Delete</button>
-        {%else%}
-        <button>Delete</button>
-        {%endif%}
-    </form>
-    <form method="POST" action="" class="form">
-        {% csrf_token %}
-        {{ commentin }}
-        <button data-dismiss="model" type="submit" value="submit">comment</button>
-     </form>
-    <hr>
-    <form method="POST" action="{% url 'detail' article.id %}">
-    {% for comment in commentform %}
-        {{comment.author}} : {{comment.comment}} ({{comment.date}})
-        {% csrf_token %}
-        {% if user.is_authenticated %}
-            <button type="submit" name="up_c" value="{{comment.pk}}">
-            up : {{comment.upvotes.count}}{{comment.model.upvotes.count}}</button>
-        {%else%}
-            <button>up : {{comment.upvotes.count}}</button>
-        {%endif%}
-        {% if user.is_authenticated %}
-            <button type="submit" name="down_c" value="{{comment.pk}}">
-            down : {{comment.downvotes.count}}{{comment.model.downvotes.count}}</button>
-        {%else%}
-            <button>down : {{comment.downvotes.count}}</button>
-        {%endif%}
-        {% if user.is_authenticated %}
-        <button type="submit" name="delete_c" value="{{comment.pk}}">
-            Delete</button>
-        {%else%}
-        <button>Delete</button>
-        {%endif%}
-        </form>
-        <form method="POST" action="" class="form">
-        {% csrf_token %}
-        {{comment}}
-        @@{{comment.parent_comment}}@@
-        {{ replyin }}
-        <button data-dismiss="model" type="submit" value="submit">comment</button>
-        <hr>
-        {% for reply in comment.replies_set.all %}
-            REPLY : {{reply.author}} : {{reply.reply}} ({{reply.date}})
-            {% if user.is_authenticated %}
-                <button type="submit" name="up_r" value="{{reply.pk}}">
-                up : {{reply.upvotes.count}}{{reply.model.upvotes.count}}</button>
-            {%else%}
-                <button>up : {{reply.upvotes.count}}</button>
-            {%endif%}
-            {% if user.is_authenticated %}
-                <button type="submit" name="down_r" value="{{reply.pk}}">
-                down : {{reply.downvotes.count}}{{reply.model.downvotes.count}}</button>
-            {%else%}
-                <button>down : {{reply.downvotes.count}}</button>
-            {%endif%}
-            {% if user.is_authenticated %}
-            <button type="submit" name="delete_r" value="{{reply.pk}}">
-                Delete</button>
-            {%else%}
-            <button>Delete</button>
-            {%endif%}
-            </form>
-        {% endfor %}
-    <br>
-    {% endfor %}
-    </form>
+<hr>
+<div class="article">
+    <div class="date">{{ article.date }} | author : <a href="/profile/{{article.author.id}}"><strong>{{ article.author }}</strong></a></div>
+    <h1>{{ article.title|linebreaks }}</h1>
+    <p>{{ article.content|linebreaks }}</p>
+</div>
+<hr>
+<form method="POST" action="{% url 'write_comment' article.id %}">
+    {% csrf_token %}
+    {{form_comment}}
+    <input type="submit">
+</form>
+{{article}}
+{% for data in article.comments_set.all %}
+aaa
+<p>{{data.comment}}</p>
+{% endfor %}
+
 {%endblock content%}

@@ -27,9 +27,3 @@ class AddArticle(LoginRequiredMixin, FormView):
                 author=self.request.user,
             )
         return redirect('main')
-
-    # def form_valid(self, form):
-        # return super().form_valid(form)
-
-    # def form_invalid(self, form_class):
-        # return super().form_invalid()
